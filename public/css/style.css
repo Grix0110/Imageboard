@@ -1,0 +1,14 @@
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.card {
+    width: 200px;
+    height: 200px;
+    border: solid 2px black;
+    border-radius: 7.25px;
+}

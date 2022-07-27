@@ -3,9 +3,29 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/style.css">
         <title>Imageboard</title>
     </head>
     <body>
+        <header id="head">HEAD TITLE</header>
+        <main id="main">
+            <h1>here should be {{images.length}} images</h1>
+            <div class="status">{{message}}</div>
+            <h1>upload your files</h1>
+            <form action="/image" 
+                    method="post" 
+                    enctype="multipart/form-data" 
+                    @submit.prevent="onFormSubmit">
+                <input type="file" name="photo">
+                <input type="submit" value="upload" class="submit-btn">
+            </form>
+            <section class="cards" >
+                <div class="card">
+                    <img v-for="image in images" v-bind:src="images.url" alt="altImage">
+                    <p class="description">{{images.title}}</p>
+                </div>
+            </section>
+        </main>
         <script
             src="/js/app.js"
             type="module"
