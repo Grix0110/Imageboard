@@ -1,14 +1,114 @@
-.cards {
+body {
+    margin: 0em;
+    font-family: "Courier New", Courier, monospace;
+    color: white;
+    background-color: black;
+}
+
+#main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     place-items: center;
     text-align: center;
     height: 100vh;
 }
 
+#head {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    font-size: 5em;
+    text-shadow: rgba(255, 0, 136, 0.7) 0 4px ;
+}
+
+.status {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin-bottom: 1em;
+}
+
+.subform {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin-bottom: 1em;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    text-align: center;
+    gap: 1em;
+    height: 80vh;
+    width: 100vw;
+}
+
 .card {
-    width: 200px;
-    height: 200px;
-    border: solid 2px black;
-    border-radius: 7.25px;
+    width: 30vw;
+    height: 35vh;
+    text-align: center;
+    border: hidden 2px white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.textInput {
+    border: solid 1px white;
+    color: white;
+    background-color: black;
+    border-radius: 25px;
+    height: 20px;
+    margin: 5px;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+}
+
+.textInput::placeholder {
+    text-align: center;
+}
+
+.textInput:focus {
+    outline: none !important;
+    border-color: rgb(255, 0, 136);
+    box-shadow: 2px 2px 2px 1px rgba(255, 0, 136, 0.6);
+}
+
+.textInput:focus::placeholder {
+    color: transparent;
+}
+
+input::file-selector-button {
+    height: 20px;
+    border-radius: 25px;
+    border: hidden 1px black;
+    background-color: white;
+    color: grey;
+    cursor: pointer;
+}
+
+input::file-selector-button:active {
+    color: rgb(255, 0, 136);
+}
+
+.submit-btn {
+    height: 25px;
+    border-radius: 25px;
+    border: solid 1px white;
+    background-color: white;
+    color: grey;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.submit-btn:active {
+    color: rgb(255, 0, 136);
+    border-color: rgb(255, 0, 136);
+    box-shadow: 2px 2px 2px 1px rgba(255, 0, 136, 0.6);
 }

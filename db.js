@@ -17,5 +17,15 @@ if (process.env.NODE_ENV === "production") {
 const db = spicedPg(dbUrl);
 
 module.exports.getData = () => {
-    return db.query(`SELECT * FROM images`);
+    return db.query(`SELECT * FROM images `);
+};
+
+module.exports.insertImage = (url, username, title, description) => {
+    return db.query(
+        `INSERT INTO images(url, username, title, description) 
+        VALUES($1, $2, $3, $4) 
+        LIMIT 6 
+        RETURNING *`,
+        [url, username, title, description]
+    );
 };

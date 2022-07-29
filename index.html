@@ -7,24 +7,29 @@
         <title>Imageboard</title>
     </head>
     <body>
-        <header id="head">HEAD TITLE</header>
         <main id="main">
-            <h1>here should be {{images.length}} images</h1>
-            <div class="status">{{message}}</div>
-            <h1>upload your files</h1>
-            <form action="/image" 
+            <header id="head">Finstergram</header>
+            <form class="subform"
+                    action="/image" 
                     method="post" 
                     enctype="multipart/form-data" 
                     @submit.prevent="onFormSubmit">
-                <input type="file" name="photo">
+                <input type="file" name="photo" class="textInput">
+                <input type="text" name="title" placeholder="title" class="textInput">
+                <input type="text" name="description" placeholder="description" class="textInput">
+                <input type="text" name="username" placeholder="username" class="textInput">
                 <input type="submit" value="upload" class="submit-btn">
+                <hr>
             </form>
+            
             <section class="cards" >
-                <div class="card">
-                    <img v-for="image in images" v-bind:src="images.url" alt="altImage">
-                    <p class="description">{{images.title}}</p>
+                <div class="card" v-for="image in images">
+                    <img  v-bind:src="image.url" alt="altImage" @click="">
+                    <span class="description">{{image.title}}</span>
                 </div>
             </section>
+
+            <image-modal :id="selectedImage" v-if="showModal" @close="closeModal"></image-modal>
         </main>
         <script
             src="/js/app.js"
