@@ -1,6 +1,6 @@
 body {
+    font-family: "Nanum Brush Script";
     margin: 0em;
-    font-family: "Courier New", Courier, monospace;
     color: white;
     background-color: black;
 }
@@ -15,16 +15,26 @@ body {
 }
 
 #head {
+    font-family: "Water Brush";
     grid-column-start: 1;
     grid-column-end: 4;
-    font-size: 5em;
-    text-shadow: rgba(255, 0, 136, 0.7) 0 4px ;
+    font-size: clamp(3em, 10vw, 5em);
+    text-shadow: rgba(255, 0, 136, 0.7) 0 3px, rgba(0, 200, 255, 0.7) 0 -3px;
+    pointer-events: none;
 }
 
-.status {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    margin-bottom: 1em;
+.formContainer {
+    z-index: 1;
+    top: 0;
+    position: fixed;
+    background-color: black;
+    width: 100vw;
+    /* border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%; */
+}
+
+span {
+    font-size: 8em;
 }
 
 .subform {
@@ -33,53 +43,28 @@ body {
     margin-bottom: 1em;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    place-items: center;
-    text-align: center;
-    gap: 1em;
-    height: 80vh;
-    width: 100vw;
-}
-
-.card {
-    width: 30vw;
-    height: 35vh;
-    text-align: center;
-    border: hidden 2px white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
-}
-
-img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
 .textInput {
     border: solid 1px white;
     color: white;
     background-color: black;
     border-radius: 25px;
     height: 20px;
-    margin: 5px;
+    margin: 0.5em;
     box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+    text-align: center;
 }
-
 .textInput::placeholder {
     text-align: center;
 }
-
+.textInput:hover {
+    box-shadow: 2px 2px 2px 1px rgba(0, 200, 255, 0.6);
+    border-color: rgb(0, 200, 255);
+}
 .textInput:focus {
     outline: none !important;
     border-color: rgb(255, 0, 136);
     box-shadow: 2px 2px 2px 1px rgba(255, 0, 136, 0.6);
 }
-
 .textInput:focus::placeholder {
     color: transparent;
 }
@@ -89,12 +74,17 @@ input::file-selector-button {
     border-radius: 25px;
     border: hidden 1px black;
     background-color: white;
-    color: grey;
+    color: black;
     cursor: pointer;
 }
-
+input::file-selector-button:hover {
+    box-shadow: 2px 2px 2px 1px rgba(0, 200, 255, 0.6);
+    border-color: rgb(0, 200, 255);
+    color: rgb(0, 200, 255);
+}
 input::file-selector-button:active {
     color: rgb(255, 0, 136);
+    box-shadow: 2px 2px 2px 1px rgba(255, 0, 136, 0.6);
 }
 
 .submit-btn {
@@ -102,13 +92,232 @@ input::file-selector-button:active {
     border-radius: 25px;
     border: solid 1px white;
     background-color: white;
-    color: grey;
+    color: black;
     box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
     cursor: pointer;
 }
-
+.submit-btn:hover {
+    box-shadow: 2px 2px 2px 1px rgba(0, 200, 255, 0.6);
+    border-color: rgb(0, 200, 255);
+    color: rgb(0, 200, 255);
+}
 .submit-btn:active {
     color: rgb(255, 0, 136);
     border-color: rgb(255, 0, 136);
     box-shadow: 2px 2px 2px 1px rgba(255, 0, 136, 0.6);
+}
+
+hr {
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+}
+
+.cards {
+    grid-area: "cards";
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    text-align: center;
+    row-gap: 2em;
+    height: 80vh;
+    width: 100vw;
+}
+.card {
+    grid-area: "card";
+    position: relative;
+    width: 30vw;
+    height: 35vh;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+}
+.card:hover {
+    box-shadow: 2px 2px 2px 1px rgba(255, 0, 136, 0.6);
+}
+img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    right: 0%;
+}
+
+.descrContain {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    z-index: 0;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.descrContain:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.description {
+    color: transparent;
+    font-size: clamp(1em, 3vw, 4em);
+    padding: clamp(1em, 6vw, 5em);
+}
+.description:hover {
+    color: white;
+    text-shadow: rgba(255, 0, 136, 0.7) 0 2px, rgba(0, 200, 255, 0.7) 0 -2px;
+    cursor: pointer;
+}
+
+.imgOverlay {
+    grid-area: "imgOverlay";
+    z-index: 2;
+    position: fixed;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.01fr 0.1fr 0.1fr 0.1fr;
+    place-items: center;
+    width: 100vw;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+#xbtn {
+    grid-area: "xbtn";
+    grid-column-start: 3;
+    cursor: pointer;
+    text-shadow: rgba(255, 0, 136, 0.7) 0 2px, rgba(0, 200, 255, 0.7) 0 -2px;
+    padding: 0;
+    font-size: 1.5em;
+    justify-self: end;
+}
+.imageBig {
+    grid-area: "imageBig";
+    position: relative;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    max-height: 35em;
+    max-width: 55em;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+}
+.arrowL {
+    cursor: pointer;
+    font-size: 3em;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    transform: rotate(90deg);
+    text-shadow: rgba(255, 0, 136, 0.7) 0 2px, rgba(0, 200, 255, 0.7) 0 -2px;
+}
+.arrowR {
+    cursor: pointer;
+    font-size: 3em;
+    grid-column-start: 4;
+    grid-row-start: 2;
+    transform: rotate(-90deg);
+    text-shadow: rgba(255, 0, 136, 0.7) 0 2px, rgba(0, 200, 255, 0.7) 0 -2px;
+}
+.titleBig {
+    grid-area: "titleBig";
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-weight: bold;
+    font-size: 2em;
+    text-shadow: rgba(255, 0, 136, 0.7) 0 2px, rgba(0, 200, 255, 0.7) 0 -2px;
+    pointer-events: none;
+    justify-self: start;
+    align-self: start;
+}
+.descriptionBig {
+    grid-area: "descriptionBig";
+    grid-row-start: 3;
+    grid-column-start: 3;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-shadow: rgba(255, 0, 136, 0.7) 0 2px, rgba(0, 200, 255, 0.7) 0 -2px;
+    pointer-events: none;
+    justify-self: end;
+    align-self: start;
+}
+
+.commentContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 4;
+}
+
+#commentUser {
+    margin-right: 1em;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    align-self: end;
+}
+
+#comment {
+    /* position: relative; */
+    width: 25em;
+    margin-right: 1em;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.commentDisplay {
+    position: relative;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 5;
+}
+
+.singleComment {
+    margin-top: 1em;
+    border: solid 1px white;
+    border-radius: 15px;
+    font-size: 1.5em;
+}
+
+@media only screen and (min-device-width: 365px) and (max-device-width: 896px) and (-webkit-min-device-pixel-ratio: 2) {
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .card {
+        width: 80vw;
+        height: 40vh;
+    }
+    .imageBig {
+        grid-column-start: 1;
+        max-height: 30em;
+        max-width: 40em;
+    }
+    .imgOverlay {
+        display: grid;
+        place-items: center;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+    .titleBig {
+        font-size: 2em;
+        grid-column-start: 1;
+    }
+    .descriptionBig {
+        font-size: 1em;
+        grid-column-end: 3;
+    }
+    #xbtn {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        justify-self: center;
+    }
+    span {
+        font-size: 35px;
+    }
 }

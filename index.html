@@ -4,32 +4,40 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Water+Brush&display=swap" rel="stylesheet">
+
         <title>Imageboard</title>
     </head>
     <body>
         <main id="main">
-            <header id="head">Finstergram</header>
-            <form class="subform"
-                    action="/image" 
-                    method="post" 
-                    enctype="multipart/form-data" 
-                    @submit.prevent="onFormSubmit">
-                <input type="file" name="photo" class="textInput">
-                <input type="text" name="title" placeholder="title" class="textInput">
-                <input type="text" name="description" placeholder="description" class="textInput">
-                <input type="text" name="username" placeholder="username" class="textInput">
-                <input type="submit" value="upload" class="submit-btn">
-                <hr>
-            </form>
-            
+            <section class="formContainer">
+            <header id="head" > Finstergram </header>
+                <form class="subform" 
+                        action="/image"
+                        method="post" 
+                        enctype="multipart/form-data" 
+                        @submit.prevent="onFormSubmit">
+                    <input type="file" name="photo" class="textInput" >
+                    <input type="text" name="title" placeholder="title" class="textInput" maxlength="20">
+                    <input type="text" name="description" placeholder="description" class="textInput" maxlength="30" onsubmit="">
+                    <input type="text" name="username" placeholder="username" class="textInput" maxlength="20">
+                    <input type="submit" value="upload" class="submit-btn" >
+                    <hr>
+                </form>
+            </section>
             <section class="cards" >
+                <span>x</span>
+                <span>x</span>
+                <span>x</span>
                 <div class="card" v-for="image in images">
-                    <img  v-bind:src="image.url" alt="altImage" @click="">
-                    <span class="description">{{image.title}}</span>
+                    <img  v-bind:src="image.url" alt="altImage">
+                    <div class="descrContain" @click="this.id=image.id"><p class="description">{{image.title}}</p></div>
                 </div>
             </section>
 
-            <image-modal :id="selectedImage" v-if="showModal" @close="closeModal"></image-modal>
+            <image-modal :id="id" v-if="id" @xbtn="closeModal"></image-modal>
         </main>
         <script
             src="/js/app.js"

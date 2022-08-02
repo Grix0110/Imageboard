@@ -1,18 +1,15 @@
 import * as Vue from "./vue.js";
-import imageModal from "./imageModal.js";
+import imageModal from "./components/imageModal.js";
 
 const app = Vue.createApp({
     data() {
         return {
             images: [],
-            showModal: 0,
-            selectedImage: this.images.id
+            id: 0,
         };
     },
     methods: {
         onFormSubmit(e) {
-            e.preventDefault();
-
             const form = e.currentTarget;
             const fileInput = form.querySelector("input[type=file]");
 
@@ -33,17 +30,12 @@ const app = Vue.createApp({
         },
 
         closeModal() {
-            console.log("closeModal is running");
-        },
-
-        showModal(id) {
-            console.log("showModal should work", id);
+            console.log("is closing");
+            this.id = 0;
         },
     },
 
-    components: {
-        imageModal: imageModal,
-    },
+    components: { imageModal },
     mounted() {
         fetch("/images")
             .then((result) => result.json())
